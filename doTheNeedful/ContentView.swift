@@ -8,15 +8,23 @@
 import SwiftUI
 
 struct ContentView: View {
+	
+	// MARK: - Properties
+	@State private var isLoggedIn: Bool = false
+	
+	
+	// MARK: - View Body
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
+        
+		if isLoggedIn {
+			ToDoListView()
+		} else {
+			LoginView()
+		}
     }
+	
+	
+	// MARK: - Functions
 }
 
 #Preview {
