@@ -8,8 +8,25 @@
 import SwiftUI
 
 struct RegistrationView: View {
+	
+	// MARK: - Properties
+	
+	
+	
+	// MARK: - View Body
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+		
+		VStack {
+			HeaderView(
+				title: "Register",
+				subtitle: "Now",
+				angle: -30,
+				backgroundColor: .orange
+			)
+			
+			Spacer()
+		}
+		
     }
 }
 
