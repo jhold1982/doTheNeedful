@@ -10,10 +10,7 @@ import SwiftUI
 struct RegistrationView: View {
 	
 	// MARK: - Properties
-	@State private var fullName: String = ""
-	@State private var emailAddress: String = ""
-	@State private var password: String = ""
-	
+	@StateObject var viewModel = RegistrationViewViewModel()
 	
 	// MARK: - View Body
     var body: some View {
@@ -30,23 +27,23 @@ struct RegistrationView: View {
 			Spacer()
 			
 			VStack {
-				TextField("Your Name", text: $fullName)
+				TextField("Your Name", text: $viewModel.name)
 					.textFieldStyle(.roundedBorder)
 					.autocapitalization(.none)
 					.autocorrectionDisabled()
 				
-				TextField("Email", text: $emailAddress)
+				TextField("Email", text: $viewModel.email)
 					.textFieldStyle(.roundedBorder)
 					.autocapitalization(.none)
 					.autocorrectionDisabled()
 				
-				SecureField("Password", text: $password)
+				SecureField("Password", text: $viewModel.password)
 					.textFieldStyle(.roundedBorder)
 					.autocapitalization(.none)
 					.autocorrectionDisabled()
 				
 				Button("Create Account...") {
-					// Registration Action
+					viewModel.register()
 				}
 				.padding(.top, 10)
 				.buttonStyle(CustomButtonStyle())

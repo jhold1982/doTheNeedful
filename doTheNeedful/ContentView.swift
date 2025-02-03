@@ -10,13 +10,13 @@ import SwiftUI
 struct ContentView: View {
 	
 	// MARK: - Properties
-	@State private var isLoggedIn: Bool = false
-	
+	@StateObject var viewModel = ContentViewModel()
 	
 	// MARK: - View Body
     var body: some View {
         
-		if isLoggedIn {
+		if viewModel.isSignedIn, !viewModel.currentUserID.isEmpty {
+			// is Signed In
 			ToDoListView()
 		} else {
 			LoginView()
