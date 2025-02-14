@@ -6,16 +6,19 @@
 //
 
 import SwiftUI
+import FirebaseFirestore
 
 struct ToDoListView: View {
 	
 	// MARK: - Properties
-	@StateObject var viewModel = ToDoListViewViewModel()
+	@StateObject var viewModel: ToDoListViewViewModel
 	
-	private let userID: String
+	@FirestoreQuery var items: [ToDoListItem]
 	
 	init(userID: String) {
-		self.userID = userID
+		self._items = FirestoreQuery(collectionPath: "users/\(userID)/todos")
+		
+		self._viewModel = StateObject(wrappedValue: ToDoListViewViewModel(userID: userID))
 	}
 	
 	// MARK: - View Body
@@ -23,7 +26,19 @@ struct ToDoListView: View {
 		
 		NavigationView {
 			VStack {
-				
+				List(items) { item in
+					ToDoListItemView(item: item)
+						.swipeActions {
+							Button(role: .destructive) {
+								// Call Delete Method
+								viewModel.deleteItem(id: item.id)
+							} label: {
+								Label("Delete", systemImage: "trash")
+							}
+							.tint(.red)
+						}
+				}
+				.listStyle(PlainListStyle())
 			}
 			.navigationTitle("To Do List")
 			.toolbar {
@@ -43,5 +58,5 @@ struct ToDoListView: View {
 }
 
 #Preview {
-	ToDoListView(userID: "")
+	ToDoListView(userID: "cythpzs0SBhIOf5nZbcNWh293En2")
 }

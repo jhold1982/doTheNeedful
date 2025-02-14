@@ -12,15 +12,44 @@ struct ToDoListItemView: View {
 	// MARK: - Properties
 	@StateObject var viewModel = ToDoListItemViewViewModel()
 	
+	let item: ToDoListItem
 	
 	
 	// MARK: - View Body
     var body: some View {
         
-		Text("ToDoListItemView")
+		HStack {
+			
+			VStack(alignment: .leading) {
+				
+				Text(item.title)
+					.font(.body)
+					.bold()
+				
+				Text("\(Date(timeIntervalSince1970: item.dueDate).formatted(date: .abbreviated, time: .shortened))")
+					.font(.footnote)
+					.foregroundStyle(.secondary)
+			}
+			
+			Spacer()
+			
+			Button {
+				viewModel.toggleCheck(item: item)
+			} label: {
+				Image(systemName: item.isDone ? "checkmark.circle.fill" : "circle")
+			}
+		}
     }
 }
 
 #Preview {
-    ToDoListItemView()
+	ToDoListItemView(
+		item: .init(
+			id: "123",
+			title: "Test",
+			dueDate: Date().timeIntervalSince1970,
+			createdDate: Date().timeIntervalSince1970,
+			isDone: false
+		)
+	)
 }

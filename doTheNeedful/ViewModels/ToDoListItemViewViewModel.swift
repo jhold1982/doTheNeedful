@@ -10,4 +10,8 @@ import Foundation
 class ToDoListItemViewViewModel: ObservableObject {
 	
 	init() { }
+	
+	func toggleCheck(item: ToDoListItem) {
+		//
+	}
 }
