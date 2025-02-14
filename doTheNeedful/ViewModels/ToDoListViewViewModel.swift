@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+class ToDoListViewViewModel: ObservableObject {
+	
+	@Published var showNewItemView: Bool = false
+	
+	init() { }
+	
+	
+}

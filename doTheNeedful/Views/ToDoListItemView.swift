@@ -8,8 +8,16 @@
 import SwiftUI
 
 struct ToDoListItemView: View {
+	
+	// MARK: - Properties
+	@StateObject var viewModel = ToDoListItemViewViewModel()
+	
+	
+	
+	// MARK: - View Body
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+		Text("ToDoListItemView")
     }
 }
 

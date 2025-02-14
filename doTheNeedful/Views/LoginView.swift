@@ -12,12 +12,12 @@ struct LoginView: View {
 	// MARK: - Properties
 	@StateObject var viewModel = LoginViewViewModel()
 	
+	
 	// MARK: - View Body
     var body: some View {
 		
 		NavigationView {
 			VStack {
-				
 				// HEADER
 				HeaderView(
 					title: "Do The Needful",

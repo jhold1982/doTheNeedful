@@ -10,21 +10,35 @@ import SwiftUI
 struct ContentView: View {
 	
 	// MARK: - Properties
-	@StateObject var viewModel = ContentViewModel()
+	@StateObject var viewModel = ContentViewViewModel()
+	
 	
 	// MARK: - View Body
     var body: some View {
         
 		if viewModel.isSignedIn, !viewModel.currentUserID.isEmpty {
 			// is Signed In
-			ToDoListView()
+			accountView
+			
 		} else {
 			LoginView()
 		}
     }
-	
-	
 	// MARK: - Functions
+	@ViewBuilder
+	var accountView: some View {
+		TabView {
+			
+			Tab("Home", systemImage: "house.fill") {
+				ToDoListView(userID: viewModel.currentUserID)
+			}
+			
+			Tab("Profile", systemImage: "person.fill") {
+				ProfileView()
+			}
+			
+		}
+	}
 }
 
 #Preview {
